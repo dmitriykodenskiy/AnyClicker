@@ -1,0 +1,25 @@
+include ../globals/data
+include ../../node_modules/bemto.pug/bemto
+include ../blocks/all
+
+- 
+    set_bemto_settings({
+        prefix: '',
+        element: '__',
+        modifier: '_'
+    })
+    
+doctype html
+html
+    head
+        link(rel="stylesheet" href="/assets/app.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+        block head_title
+    body
+        block header
+        block content
+        
+        
+        script(src="/assets/app.js")
+        
+        block footer

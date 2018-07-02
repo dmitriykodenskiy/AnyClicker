@@ -1,0 +1,32 @@
+mixin headerMenu(prefix, items, addUlClasses, addLiClasses)
+    - ulClasses = [ prefix + "-menu"]
+    - if (!!addUlClasses) ulClasses.push(addUlClasses);
+    
+    +b.UL(class=ulClasses)
+        each item in items
+            - liClasses = ["item"]
+            - if (!!addLiClasses) liClasses.push(addLiClasses);
+            
+            +e.LI(class=liClasses)
+                if item.titleModel
+                    +e.A(href=item.url, title=item.titleName).link
+                        +e.SPAN.link_bold= item.titleModel
+                        | 
+                        +e.SPAN.link_normal= item.titleName
+                +e.A(href=item.url, title=item.title).link= item.title
+                if item.badge
+                    +e.SPAN.badge= item.badge
+                if item.children
+                    +headerMenu(prefix + "-sub", item.children)
+                    
+mixin header
+    +b.HEADER.header
+        +e.A.logo-wrapper(href="/")
+            +e.FIGURE.logo
+                +e.IMG.logo-image(src="/assets/img/logo.png" alt="")
+                +e.FIGCAPTION.logo-name #{logoName}
+        +e.right
+            +headerMenu("header", headerMenuItems)
+            +e.A(href="#")
+                +e.IMG.linkedin(src="/assets/img/header-linkedin.png" alt="")
+        
